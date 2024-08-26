@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon Panier{% endblock %}
+
+{% block body %}
+<h1>Mon Panier</h1>
+
+{% if cartItems is not empty %}
+    <ul>
+        {% for item in cartItems %}
+            <li>
+                {% if item.lecon %}
+                    Leçon : {{ item.lecon.title }} - {{ item.lecon.price }} €
+                {% elseif item.cursus %}
+                    Cursus : {{ item.cursus.title }} - {{ item.cursus.price }} €
+                {% endif %}
+                <!-- Ajouter un bouton pour supprimer l'article -->
+                <form action="{{ path('supprimer_article', {'id': item.id}) }}" method="POST" style="display: inline;">
+                    <button type="submit" class="btn btn-danger btn-sm">Supprimer</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <!-- Bouton de paiement Stripe -->
+    <button id="checkout-button" class="btn btn-success">Valider le panier et payer</button>
+
+    <!-- Script Stripe.js -->
+    <script src="https://js.stripe.com/v3/"></script>
+
+    <!-- Script de gestion du paiement -->
+    <script>
+        // Initialisez Stripe avec la clé publique
+        const stripe = Stripe('{{ stripe_public_key }}');
+
+        // Obtenez le bouton de paiement par son ID
+        const checkoutButton = document.getElementById('checkout-button');
+
+        // Ajoutez un écouteur d'événement pour le clic du bouton
+        checkoutButton.addEventListener('click', () => {
+            // Redirigez vers Stripe Checkout en utilisant l'ID de session généré
+            stripe.redirectToCheckout({
+                sessionId: '{{ clientSecret }}',
+            }).then((result) => {
+                if (result.error) {
+                    // Affichez les erreurs Stripe Checkout
+                    console.error('Stripe Checkout error:', result.error.message);
+                    alert(result.error.message);
+                }
+            }).catch((error) => {
+                // Gère les erreurs de réseau ou de fetch
+                console.error('FetchError:', error);
+                alert('An error occurred while processing your request. Please try again.');
+            });
+        });
+    </script>
+{% else %}
+    <p>Votre panier est vide.</p>
+{% endif %}
+
+<!-- Ajoutez un bouton pour revenir à la page d'accueil -->
+<a href="{{ path('home') }}" class="btn btn-primary">Retour à l'accueil</a>
+
+{% endblock %}

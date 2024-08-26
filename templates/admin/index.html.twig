@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Backoffice{% endblock %}
+
+{% block body %}
+<h1>Tableau de bord du Backoffice</h1>
+
+<ul>
+    <li><a href="{{ path('admin_users') }}">Gérer les utilisateurs</a></li>
+    <li><a href="{{ path('admin_formations') }}">Gérer les formations</a></li>
+    <li><a href="{{ path('admin_achats') }}">Gérer les achats</a></li> <!-- Nouveau lien ajouté -->
+</ul>
+<a href="{{ path('home') }}">Retour à l'accueil</a>
+{% endblock %}

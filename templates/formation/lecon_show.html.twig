@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Leçon: {{ lecon.title }}{% endblock %}
+
+{% block body %}
+<h1>{{ lecon.title }}</h1>
+
+<div>
+    <p>{{ lecon.content }}</p>
+    <p>Prix: {{ lecon.price }} €</p>
+    <p><a href="{{ lecon.videoUrl }}">Voir la vidéo</a></p>
+</div>
+
+{% if not lecon.isRead %}
+    <form action="{{ path('finish_lecon', {id: lecon.id}) }}" method="post">
+        <button type="submit">Leçon finie</button>
+    </form>
+{% else %}
+    <p>Cette leçon est terminée.</p>
+{% endif %}
+
+<a href="{{ path('mes_lecons') }}">Retour à Mes Leçons</a>
+{% endblock %}

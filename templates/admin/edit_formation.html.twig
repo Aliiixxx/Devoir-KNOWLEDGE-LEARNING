@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier la Formation{% endblock %}
+
+{% block body %}
+<h1>Modifier la Formation</h1>
+
+<form method="post">
+    <div>
+        <label for="title">Titre :</label>
+        <input type="text" id="title" name="title" value="{{ formation.title }}" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Sauvegarder</button>
+</form>
+
+<a href="{{ path('admin_formations') }}">Retour à la liste des formations</a>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter une Leçon{% endblock %}
+
+{% block body %}
+<h1>Ajouter une Leçon</h1>
+
+<form method="post">
+    <div>
+        <label for="cursus_id">Cursus :</label>
+        <select id="cursus_id" name="cursus_id" required>
+            {% for c in cursus %}
+                <option value="{{ c.id }}">{{ c.title }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div>
+        <label for="title">Titre :</label>
+        <input type="text" id="title" name="title" value="{{ lecon.title ?? '' }}" required>
+    </div>
+    <div>
+        <label for="price">Prix :</label>
+        <input type="number" id="price" name="price" value="{{ lecon.price ?? '' }}" step="0.01" required>
+    </div>
+    <div>
+        <label for="content">Contenu :</label>
+        <textarea id="content" name="content" rows="10" required>{{ lecon.content ?? '' }}</textarea>
+    </div>
+    <div>
+        <label for="videoUrl">URL de la vidéo :</label>
+        <input type="url" id="videoUrl" name="videoUrl" value="{{ lecon.videoUrl ?? '' }}">
+    </div>
+    <button type="submit" class="btn btn-success">Sauvegarder</button>
+</form>
+
+<a href="{{ path('admin_formations') }}">Retour à la liste des leçons</a>
+{% endblock %}

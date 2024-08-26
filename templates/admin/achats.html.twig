@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestion des Achats{% endblock %}
+
+{% block body %}
+<h1>Gestion des Achats</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Utilisateur</th>
+            <th>Leçon</th>
+            <th>Cursus</th>
+            <th>Date d'achat</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for achat in achats %}
+            <tr>
+                <td>{{ achat.id }}</td>
+                <td>{{ achat.user.email }}</td>
+                <td>{{ achat.lecon ? achat.lecon.title : 'N/A' }}</td>
+                <td>{{ achat.cursus ? achat.cursus.title : 'N/A' }}</td>
+                <td>{{ achat.createdAt|date('d/m/Y H:i') }}</td>
+                <td>
+                    <a href="{{ path('admin_delete_achat', {'id': achat.id}) }}" class="btn btn-danger btn-sm" onclick="return confirm('Voulez-vous vraiment supprimer cet achat?');">Supprimer</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<a href="{{ path('admin_dashboard') }}" class="btn btn-secondary">Retour au tableau de bord</a>
+{% endblock %}

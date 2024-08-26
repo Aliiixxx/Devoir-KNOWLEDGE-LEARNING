@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter une Formation{% endblock %}
+
+{% block body %}
+<h1>Ajouter une Formation</h1>
+
+<form method="post">
+    <div>
+        <label for="title">Titre :</label>
+        <input type="text" id="title" name="title" required>
+    </div>
+    <button type="submit" class="btn btn-success">Ajouter</button>
+</form>
+
+<a href="{{ path('admin_formations') }}">Retour à la liste des formations</a>
+{% endblock %}

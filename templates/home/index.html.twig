@@ -1,0 +1,98 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block body %}
+<h1>Liste des Formations</h1>
+
+{% if formations is not empty %}
+    {% for formation in formations %}
+        <div class="formation">
+            <h2>{{ formation.title }}</h2>
+
+            {% if formation.cursuses is not empty %}
+                <ul>
+                    {% for cursus in formation.cursuses %}
+                        <li>
+                            <h3>{{ cursus.title }} ({{ cursus.price }} €)</h3>
+
+                            {% set cursusOwned = false %}
+                            {% set leconOwnedInCursus = false %}
+                            {% set leconInCartInCursus = false %}
+
+                            {% for lecon in cursus.lecons %}
+                                {% if app.user and app.user.getAchats()|filter(achat => achat.lecon and achat.lecon.id == lecon.id)|length > 0 %}
+                                    {% set leconOwnedInCursus = true %}
+                                {% endif %}
+                                {% if lecon.id in leconIdsInCart %}
+                                    {% set leconInCartInCursus = true %}
+                                {% endif %}
+                            {% endfor %}
+
+                            {% if app.user and app.user.getAchats()|filter(achat => achat.cursus and achat.cursus.id == cursus.id)|length > 0 %}
+                                {% set cursusOwned = true %}
+                            {% endif %}
+
+                            {% if app.user %}
+                                {% if cursusOwned %}
+                                    <button class="btn btn-secondary" disabled>Vous possédez déjà ce cursus.</button>
+                                {% elseif leconOwnedInCursus %}
+                                    <button class="btn btn-secondary" disabled>Vous possédez déjà une ou plusieurs leçons de ce cursus.</button>
+                                {% elseif leconInCartInCursus %}
+                                    <button class="btn btn-secondary" disabled>Une ou plusieurs leçons de ce cursus sont déjà dans votre panier.</button>
+                                {% else %}
+                                    {% if cursus.id in cursusIdsInCart %}
+                                        <button class="btn btn-secondary" disabled>Ce cursus est déjà dans votre panier.</button>
+                                    {% else %}
+                                        <button class="btn btn-primary" onclick="window.location.href='{{ path('ajouter_cursus', {id: cursus.id}) }}'">Ajouter ce cursus au panier</button>
+                                    {% endif %}
+                                {% endif %}
+                            {% else %}
+                                <button class="btn btn-primary" onclick="alert('Veuillez vous connecter pour acheter ce cursus.')">Acheter ce cursus</button>
+                            {% endif %}
+
+                            {% if cursus.lecons is not empty %}
+                                <ul>
+                                    {% for lecon in cursus.lecons %}
+                                        <li>
+                                            <h4>{{ lecon.title }} ({{ lecon.price }} €)</h4>
+
+                                            {% set leconOwned = false %}
+                                            {% if app.user and app.user.getAchats()|filter(achat => achat.lecon and achat.lecon.id == lecon.id)|length > 0 %}
+                                                {% set leconOwned = true %}
+                                            {% endif %}
+
+                                            {% if app.user %}
+                                                {% if cursus.id in cursusIdsInCart %}
+                                                    <button class="btn btn-secondary" disabled>Cette leçon est déjà dans votre panier.</button>
+                                                {% elseif cursusOwned %}
+                                                    <button class="btn btn-secondary" disabled>Vous possédez déjà cette leçon.</button>
+                                                {% elseif leconOwned %}
+                                                    <button class="btn btn-secondary" disabled>Vous possédez déjà cette leçon.</button>
+                                                {% elseif lecon.id in leconIdsInCart %}
+                                                    <button class="btn btn-secondary" disabled>Cette leçon est déjà dans votre panier.</button>
+                                                {% else %}
+                                                    <button class="btn btn-primary" onclick="window.location.href='{{ path('ajouter_lecon', {id: lecon.id}) }}'">Ajouter cette leçon au panier</button>
+                                                {% endif %}
+                                            {% else %}
+                                                <button class="btn btn-primary" onclick="alert('Veuillez vous connecter pour acheter cette leçon.')">Acheter cette leçon</button>
+                                            {% endif %}
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            {% else %}
+                                <p>Aucune leçon disponible pour ce cursus.</p>
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>Aucun cursus disponible pour cette formation.</p>
+            {% endif %}
+        </div>
+    {% endfor %}
+{% else %}
+    <p>Aucune formation disponible.</p>
+{% endif %}
+
+{% endblock %}

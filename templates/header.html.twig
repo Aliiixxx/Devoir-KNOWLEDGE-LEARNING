@@ -1,0 +1,19 @@
+<!-- templates/partials/header.html.twig -->
+<header>
+    <nav>
+        <ul>
+            <li><a href="{{ path('home') }}">Accueil</a></li>
+
+            {% if app.user %}
+                <li><a href="{{ path('mes_lecons') }}">Mes Leçons</a></li>
+                <li><a href="{{ path('mon_panier') }}">Panier</a></li>
+                <li>
+                    <a href="{{ path('app_logout') }}">Se Déconnecter</a>
+                </li>
+            {% else %}
+                <li><a href="{{ path('app_login') }}">Se Connecter</a></li>
+                <li><a href="{{ path('app_register') }}">Inscription</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+</header>

@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter un utilisateur{% endblock %}
+
+{% block body %}
+<h1>Ajouter un utilisateur</h1>
+
+<form method="post">
+    <div>
+        <label for="firstname">Prénom :</label>
+        <input type="text" id="firstname" name="firstname" required>
+    </div>
+    <div>
+        <label for="lastname">Nom de famille :</label>
+        <input type="text" id="lastname" name="lastname" required>
+    </div>
+    <div>
+        <label for="email">Email :</label>
+        <input type="email" id="email" name="email" required>
+    </div>
+    <div>
+        <label for="roles">Rôles :</label>
+        <input type="text" id="roles" name="roles" required>
+    </div>
+    <div>
+        <label for="password">Mot de passe :</label>
+        <input type="password" id="password" name="password" required>
+    </div>
+    <button type="submit" class="btn btn-success">Ajouter</button>
+</form>
+
+<a href="{{ path('admin_users') }}">Retour à la liste des utilisateurs</a>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier l'utilisateur{% endblock %}
+
+{% block body %}
+<h1>Modifier l'utilisateur</h1>
+
+<form method="post">
+    <div>
+        <label for="firstname">Prénom :</label>
+        <input type="text" id="firstname" name="firstname" value="{{ user.firstname }}" required>
+    </div>
+    <div>
+        <label for="lastname">Nom de famille :</label>
+        <input type="text" id="lastname" name="lastname" value="{{ user.lastname }}" required>
+    </div>
+    <div>
+        <label for="roles">Rôles :</label>
+        <input type="text" id="roles" name="roles" value="{{ user.roles[0] }}" required>
+    </div>
+    <div>
+        <label for="password">Mot de passe :</label>
+        <input type="password" id="password" name="password">
+        <small>Laissez vide pour ne pas changer le mot de passe</small>
+    </div>
+    <button type="submit">Sauvegarder</button>
+</form>
+
+<a href="{{ path('admin_users') }}">Retour à la liste des utilisateurs</a>
+{% endblock %}

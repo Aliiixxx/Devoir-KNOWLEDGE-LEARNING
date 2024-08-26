@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes Leçons{% endblock %}
+
+{% block body %}
+<h1>Mes Leçons</h1>
+
+{% if formationsCompletes is not empty %}
+    <h2>Certifications Obtenues</h2>
+    <ul>
+        {% for formation in formationsCompletes %}
+            <li>Formation : {{ formation.title }} - Certifiée</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+{% if lecons is not empty %}
+    {% set lastFormation = null %}
+    {% set lastCursus = null %}
+    
+    {% for lecon in lecons %}
+        {% if lecon.cursus.formation != lastFormation %}
+            {% if lastFormation is not null %}
+                </ul>
+                </ul>
+            {% endif %}
+            <h1>{{ lecon.cursus.formation.title }}</h1>
+            <ul>
+            {% set lastFormation = lecon.cursus.formation %}
+            {% set lastCursus = null %}
+        {% endif %}
+
+        {% if lecon.cursus != lastCursus %}
+            {% if lastCursus is not null %}
+                </ul>
+            {% endif %}
+            <h2>{{ lecon.cursus.title }}</h2>
+            <ul>
+            {% set lastCursus = lecon.cursus %}
+        {% endif %}
+
+        <li>{{ lecon.title }} - <a href="{{ path('show_lecon', {id: lecon.id}) }}">Voir la leçon</a></li>
+
+    {% endfor %}
+    </ul>
+    </ul>
+{% else %}
+    <p>Vous n'avez acheté aucune leçon.</p>
+{% endif %}
+
+<a href="{{ path('home') }}">Retour à l'accueil</a>
+{% endblock %}

@@ -3,3 +3,15 @@ controllers:
         path: ../src/Controller/
         namespace: App\Controller
     type: attribute
+
+paypal_payment:
+    path: /pay/paypal
+    controller: App\Controller\PaymentController::pay
+
+paypal_success:
+    path: /paypal/success
+    controller: App\Controller\PaymentController::success
+
+paypal_cancel:
+    path: /paypal/cancel
+    controller: App\Controller\PaymentController::cancel
