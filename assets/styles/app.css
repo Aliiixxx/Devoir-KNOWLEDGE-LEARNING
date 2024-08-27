@@ -1,33 +1,176 @@
-button {
-    background-color: #0074c7;
-    color: white; 
-    border: none; 
-    padding: 10px 20px; 
-    text-align: center; 
-    text-decoration: none; 
-    display: inline-block;
-    font-size: 16px; 
-    margin: 5px 2px; 
-    cursor: pointer; 
-    border-radius: 5px; 
-    transition: background-color 0.3s, transform 0.3s; 
-  }
-  
-  button:hover {
-    background-color: #00497c; 
-    transform: scale(1.05); 
-  }
-  
-  button:disabled {
-    background-color: #cd2c2e;
-    color: white;
-    cursor: not-allowed;
-    opacity: 0.6;
-    transform: none;
-  }
-  
-  button:disabled:hover {
-    background-color: #cd2c2fa1;
-    transform: none;
-  }
-  
+body {
+  background-color: #f1f8fc;
+  color: #000;
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+header {
+  background-color: #384050;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo img {
+  height: 60px;
+  max-width: 100%;
+}
+
+ul, ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+nav ul {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+nav ul li a {
+  color: #f1f8fc;
+  text-decoration: none;
+  padding: 10px 15px;
+  font-size: 16px;
+  transition: color 0.3s;
+}
+
+nav ul li.home-button a {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+button, .btn {
+  background-color: #0074c7;
+  color: white; 
+  border: none; 
+  padding: 10px 20px; 
+  text-align: center; 
+  font-size: 16px; 
+  margin: 5px 2px; 
+  cursor: pointer; 
+  border-radius: 5px; 
+  transition: background-color 0.3s, transform 0.3s; 
+  font-family: "Comic Sans MS", cursive, sans-serif;
+}
+
+button:hover, .btn:hover {
+  background-color: #00497c; 
+  transform: scale(1.05); 
+}
+
+button:disabled, .btn:disabled {
+  background-color: #cd2c2e;
+  color: white;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+button:disabled:hover, .btn:disabled:hover {
+  background-color: #cd2c2fa1;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.card {
+  background-color: white;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  display: inline-block;
+  width: 90%;
+}
+
+.table-responsive {
+  overflow-x: auto;
+  margin-bottom: 20px;
+}
+
+.table {
+  width: 100%;
+  margin-bottom: 1rem;
+  color: #212529;
+  border-collapse: collapse;
+}
+
+.table th, 
+.table td {
+  padding: 12px;
+  vertical-align: middle;
+  border-top: 1px solid #dee2e6;
+}
+
+.table th {
+  background-color: #384050;
+  color: #f1f8fc;
+  text-align: center;
+}
+
+.table td {
+  background-color: #ffffff;
+}
+
+.table tbody tr:nth-of-type(even) {
+  background-color: #f8f9fa;
+}
+
+.table tbody tr:hover {
+  background-color: #f1f8fc;
+}
+
+.table a.btn {
+  font-size: 14px;
+  padding: 6px 12px;
+  border-radius: 3px;
+  text-decoration: none;
+}
+
+.table a.btn-primary {
+  background-color: #0074c7;
+  color: white;
+}
+
+.table a.btn-danger {
+  background-color: #cd2c2e;
+  color: white;
+}
+
+.table a.btn-primary:hover,
+.table a.btn-danger:hover {
+  opacity: 0.8;
+}
+
+.table a.btn-primary:focus,
+.table a.btn-danger:focus {
+  opacity: 0.9;
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.table td,
+.table th {
+  border: 1px solid #dee2e6;
+}
+
+.button-container {
+  margin: 20px 0;
+}

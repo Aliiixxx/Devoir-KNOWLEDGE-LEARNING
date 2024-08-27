@@ -1,19 +1,25 @@
 <!-- templates/partials/header.html.twig -->
 <header>
-    <nav>
-        <ul>
-            <li><a href="{{ path('home') }}">Accueil</a></li>
-
-            {% if app.user %}
-                <li><a href="{{ path('mes_lecons') }}">Mes Leçons</a></li>
-                <li><a href="{{ path('mon_panier') }}">Panier</a></li>
-                <li>
-                    <a href="{{ path('app_logout') }}">Se Déconnecter</a>
+    <div class="header-container">
+        <div class="logo">
+            <a href="{{ path('home') }}">
+                <img src="{{ asset('images/logo.png') }}" alt="Logo">
+            </a>
+        </div>
+        <nav>
+            <ul>
+                <li class="home-button">
+                    <a href="{{ path('home') }}">Accueil</a>
                 </li>
-            {% else %}
-                <li><a href="{{ path('app_login') }}">Se Connecter</a></li>
-                <li><a href="{{ path('app_register') }}">Inscription</a></li>
-            {% endif %}
-        </ul>
-    </nav>
+                {% if app.user %}
+                    <li><a href="{{ path('mes_lecons') }}">Mes Leçons</a></li>
+                    <li><a href="{{ path('mon_panier') }}">Panier</a></li>
+                    <li><a href="{{ path('app_logout') }}">Se Déconnecter</a></li>
+                {% else %}
+                    <li><a href="{{ path('app_login') }}">Se Connecter</a></li>
+                    <li><a href="{{ path('app_register') }}">Inscription</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
 </header>

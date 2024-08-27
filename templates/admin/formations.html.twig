@@ -5,117 +5,112 @@
 {% block body %}
 <h1>Gérer les Formations</h1>
 
-<!-- Bouton pour ajouter une nouvelle formation -->
-<a href="{{ path('admin_add_formation') }}" class="btn btn-success" style="margin-bottom: 20px;">Ajouter une formation</a>
+<!-- Ajoutez ici une classe pour mieux gérer la marge -->
+<div class="button-container">
+    <a href="{{ path('admin_add_formation') }}" class="btn btn-success">Ajouter une formation</a>
+</div>
 
-<table>
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Titre</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for formation in formations %}
+<div class="table-responsive">
+    <table class="table">
+        <thead>
             <tr>
-                <td>{{ formation.id }}</td>
-                <td>{{ formation.title }}</td>
-                <td>
-                    <a href="{{ path('admin_edit_formation', {id: formation.id}) }}" class="btn btn-primary">Modifier</a>
-                    <a href="{{ path('admin_delete_formation', {id: formation.id}) }}" class="btn btn-danger" 
-                       onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette formation ?');">Supprimer</a>
-                </td>
+                <th>ID</th>
+                <th>Titre</th>
+                <th>Actions</th>
             </tr>
-        {% endfor %}
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            {% for formation in formations %}
+                <tr>
+                    <td>{{ formation.id }}</td>
+                    <td>{{ formation.title }}</td>
+                    <td>
+                        <a href="{{ path('admin_edit_formation', {id: formation.id}) }}" class="btn btn-primary btn-sm">Modifier</a>
+                        <a href="{{ path('admin_delete_formation', {id: formation.id}) }}" class="btn btn-danger btn-sm" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette formation ?');">Supprimer</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 
 <h2>Gérer les Cursus</h2>
 
-<!-- Bouton pour ajouter un nouveau cursus -->
-<a href="{{ path('admin_add_cursus') }}" class="btn btn-success" style="margin-bottom: 20px;">Ajouter un cursus</a>
+<div class="button-container">
+    <a href="{{ path('admin_add_cursus') }}" class="btn btn-success">Ajouter un cursus</a>
+</div>
 
-<table>
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Formation</th>
-            <th>Titre</th>
-            <th>Prix</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for cursus in cursus %}
+<div class="table-responsive">
+    <table class="table">
+        <thead>
             <tr>
-                <td>{{ cursus.id }}</td>
-                <td>{{ cursus.formation.title }}</td>
-                <td>{{ cursus.title }}</td>
-                <td>{{ cursus.price }} €</td>
-                <td>
-                    <a href="{{ path('admin_edit_cursus', {id: cursus.id}) }}" class="btn btn-primary">Modifier</a>
-                    <a href="{{ path('admin_delete_cursus', {id: cursus.id}) }}" class="btn btn-danger" 
-                       onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce cursus ?');">Supprimer</a>
-                </td>
+                <th>ID</th>
+                <th>Formation</th>
+                <th>Titre</th>
+                <th>Prix</th>
+                <th>Actions</th>
             </tr>
-        {% endfor %}
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            {% for cursus in cursus %}
+                <tr>
+                    <td>{{ cursus.id }}</td>
+                    <td>{{ cursus.formation.title }}</td>
+                    <td>{{ cursus.title }}</td>
+                    <td>{{ cursus.price }} €</td>
+                    <td>
+                        <a href="{{ path('admin_edit_cursus', {id: cursus.id}) }}" class="btn btn-primary btn-sm">Modifier</a>
+                        <a href="{{ path('admin_delete_cursus', {id: cursus.id}) }}" class="btn btn-danger btn-sm" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce cursus ?');">Supprimer</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 
 <h2>Gérer les Leçons</h2>
 
-<!-- Bouton pour ajouter une nouvelle leçon -->
-<a href="{{ path('admin_add_lecon') }}" class="btn btn-success" style="margin-bottom: 20px;">Ajouter une leçon</a>
+<div class="button-container">
+    <a href="{{ path('admin_add_lecon') }}" class="btn btn-success">Ajouter une leçon</a>
+</div>
 
-<table>
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Cursus</th>
-            <th>Titre</th>
-            <th>Prix</th>
-            <th>Vidéo</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for lecon in lecons %}
+<div class="table-responsive">
+    <table class="table">
+        <thead>
             <tr>
-                <td>{{ lecon.id }}</td>
-                <td>{{ lecon.cursus.title }}</td>
-                <td>{{ lecon.title }}</td>
-                <td>{{ lecon.price }} €</td>
-                <td>
-                    {% if lecon.videoUrl %}
-                        <a href="{{ lecon.videoUrl }}" target="_blank">Voir la vidéo</a>
-                    {% else %}
-                        Pas de vidéo
-                    {% endif %}
-                </td>
-                <td>
-                    <a href="{{ path('admin_edit_lecon', {id: lecon.id}) }}" class="btn btn-primary">Modifier</a>
-                    <a href="{{ path('admin_delete_lecon', {id: lecon.id}) }}" class="btn btn-danger" 
-                       onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette leçon ?');">Supprimer</a>
-                </td>
+                <th>ID</th>
+                <th>Cursus</th>
+                <th>Titre</th>
+                <th>Prix</th>
+                <th>Vidéo</th>
+                <th>Actions</th>
             </tr>
-        {% endfor %}
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            {% for lecon in lecons %}
+                <tr>
+                    <td>{{ lecon.id }}</td>
+                    <td>{{ lecon.cursus.title }}</td>
+                    <td>{{ lecon.title }}</td>
+                    <td>{{ lecon.price }} €</td>
+                    <td>
+                        {% if lecon.videoUrl %}
+                            <a href="{{ lecon.videoUrl }}" target="_blank">Voir la vidéo</a>
+                        {% else %}
+                            Pas de vidéo
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="{{ path('admin_edit_lecon', {id: lecon.id}) }}" class="btn btn-primary btn-sm">Modifier</a>
+                        <a href="{{ path('admin_delete_lecon', {id: lecon.id}) }}" class="btn btn-danger btn-sm" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette leçon ?');">Supprimer</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 
-
-<script>
-    function toggleContent(contentId) {
-        var contentRow = document.getElementById(contentId);
-        if (contentRow.style.display === "none") {
-            contentRow.style.display = "table-row";
-        } else {
-            contentRow.style.display = "none";
-        }
-    }
-</script>
-
-
-
-<a href="{{ path('admin_dashboard') }}">Retour au tableau de bord</a>
+<div class="button-container">
+    <a href="{{ path('admin_dashboard') }}" class="btn btn-secondary">Retour au tableau de bord</a>
+</div>
 {% endblock %}

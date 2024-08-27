@@ -6,6 +6,7 @@
 <h1>Mon Panier</h1>
 
 {% if cartItems is not empty %}
+<div class="card">
     <ul>
         {% for item in cartItems %}
             <li>
@@ -21,6 +22,7 @@
             </li>
         {% endfor %}
     </ul>
+    </div>
 
     <!-- Bouton de paiement Stripe -->
     <button id="checkout-button" class="btn btn-success">Valider le panier et payer</button>
@@ -30,25 +32,19 @@
 
     <!-- Script de gestion du paiement -->
     <script>
-        // Initialisez Stripe avec la clé publique
         const stripe = Stripe('{{ stripe_public_key }}');
 
-        // Obtenez le bouton de paiement par son ID
         const checkoutButton = document.getElementById('checkout-button');
 
-        // Ajoutez un écouteur d'événement pour le clic du bouton
         checkoutButton.addEventListener('click', () => {
-            // Redirigez vers Stripe Checkout en utilisant l'ID de session généré
             stripe.redirectToCheckout({
                 sessionId: '{{ clientSecret }}',
             }).then((result) => {
                 if (result.error) {
-                    // Affichez les erreurs Stripe Checkout
                     console.error('Stripe Checkout error:', result.error.message);
                     alert(result.error.message);
                 }
             }).catch((error) => {
-                // Gère les erreurs de réseau ou de fetch
                 console.error('FetchError:', error);
                 alert('An error occurred while processing your request. Please try again.');
             });

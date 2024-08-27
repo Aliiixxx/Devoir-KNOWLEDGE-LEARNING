@@ -15,13 +15,23 @@
         <input type="text" id="lastname" name="lastname" value="{{ user.lastname }}" required>
     </div>
     <div>
-        <label for="roles">Rôles :</label>
-        <input type="text" id="roles" name="roles" value="{{ user.roles[0] }}" required>
+        <label for="email">Email :</label>
+        <input type="email" id="email" name="email" value="{{ user.email }}" required>
+    </div>
+    <div>
+        <label>Rôles :</label>
+        <div>
+            <input type="checkbox" id="role_user" name="roles[]" value="ROLE_USER" {% if 'ROLE_USER' in user.roles %}checked{% endif %}>
+            <label for="role_user">Utilisateur</label>
+        </div>
+        <div>
+            <input type="checkbox" id="role_admin" name="roles[]" value="ROLE_ADMIN" {% if 'ROLE_ADMIN' in user.roles %}checked{% endif %}>
+            <label for="role_admin">Administrateur</label>
+        </div>
     </div>
     <div>
         <label for="password">Mot de passe :</label>
         <input type="password" id="password" name="password">
-        <small>Laissez vide pour ne pas changer le mot de passe</small>
     </div>
     <button type="submit">Sauvegarder</button>
 </form>

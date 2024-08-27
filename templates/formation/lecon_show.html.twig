@@ -7,8 +7,6 @@
 
 <div>
     <p>{{ lecon.content }}</p>
-    <p>Prix: {{ lecon.price }} €</p>
-    <p><a href="{{ lecon.videoUrl }}">Voir la vidéo</a></p>
 </div>
 
 {% if not lecon.isRead %}
@@ -19,5 +17,5 @@
     <p>Cette leçon est terminée.</p>
 {% endif %}
 
-<a href="{{ path('mes_lecons') }}">Retour à Mes Leçons</a>
+<a href="{{ path('mes_lecons') }}"><button class="btn btn-primary">Retour à Mes Leçons</button></a>
 {% endblock %}

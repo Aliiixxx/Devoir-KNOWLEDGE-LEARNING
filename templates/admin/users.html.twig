@@ -5,46 +5,50 @@
 {% block body %}
 <h1>Gérer les utilisateurs</h1>
 
-<a href="{{ path('admin_add_user') }}" class="btn btn-success" style="margin-bottom: 20px;">Ajouter un utilisateur</a>
+<div class="button-container">
+    <a href="{{ path('admin_add_user') }}" class="btn btn-success">Ajouter un utilisateur</a>
+</div>
 
-<table>
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Nom de famille</th>
-            <th>Prénom</th>
-            <th>Email</th>
-            <th>Rôles</th>
-            <th>Certifications</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for user in users %}
+<div class="table-responsive">
+    <table class="table">
+        <thead>
             <tr>
-                <td>{{ user.id }}</td>
-                <td>{{ user.lastname }}</td>
-                <td>{{ user.firstname }}</td>
-                <td>{{ user.email }}</td>
-                <td>{{ user.roles|json_encode }}</td>
-                <td>
-                    {% for certification in user.certifications %}
-                        <div>
-                            {{ certification.formation.title }} - 
-                            <a href="{{ path('admin_remove_certification', {id: certification.id}) }}" class="btn btn-danger" 
-                               onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette certification ?');">Supprimer</a>
-                        </div>
-                    {% endfor %}
-                </td>
-                <td>
-                    <a href="{{ path('admin_edit_user', {id: user.id}) }}" class="btn btn-primary">Modifier</a>
-                    <a href="{{ path('admin_delete_user', {id: user.id}) }}" class="btn btn-danger" 
-                       onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?');">Supprimer</a>
-                </td>
+                <th>ID</th>
+                <th>Nom de famille</th>
+                <th>Prénom</th>
+                <th>Email</th>
+                <th>Rôles</th>
+                <th>Certifications</th>
+                <th>Actions</th>
             </tr>
-        {% endfor %}
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.lastname }}</td>
+                    <td>{{ user.firstname }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.roles|json_encode }}</td>
+                    <td>
+                        {% for certification in user.certifications %}
+                            <div>
+                                {{ certification.formation.title }} 
+                                <a href="{{ path('admin_remove_certification', {id: certification.id}) }}" class="btn btn-danger btn-sm" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette certification ?');">Supprimer</a>
+                            </div>
+                        {% endfor %}
+                    </td>
+                    <td>
+                        <a href="{{ path('admin_edit_user', {id: user.id}) }}" class="btn btn-primary btn-sm">Modifier</a>
+                        <a href="{{ path('admin_delete_user', {id: user.id}) }}" class="btn btn-danger btn-sm" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?');">Supprimer</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 
-<a href="{{ path('admin_dashboard') }}">Retour au tableau de bord</a>
+<div class="button-container">
+    <a href="{{ path('admin_dashboard') }}" class="btn btn-secondary">Retour au tableau de bord</a>
+</div>
 {% endblock %}
