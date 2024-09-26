@@ -80,13 +80,18 @@ class AdminController extends AbstractController
     // Route to delete a user
     #[Route('/admin/users/delete/{id}', name: 'admin_delete_user')]
     public function deleteUser(User $user): Response
-    {
-        $this->entityManager->remove($user);
-        $this->entityManager->flush();
+{
+    $achats = $this->entityManager->getRepository(Achat::class)->findBy(['user' => $user]);
 
-        return $this->redirectToRoute('admin_users');
+    foreach ($achats as $achat) {
+        $this->entityManager->remove($achat);
     }
 
+    $this->entityManager->remove($user);
+    $this->entityManager->flush();
+
+    return $this->redirectToRoute('admin_users');
+}
     // Route to remove a certification from a user
     #[Route('/admin/users/remove-certification/{id}', name: 'admin_remove_certification')]
     public function removeCertification(int $id): Response

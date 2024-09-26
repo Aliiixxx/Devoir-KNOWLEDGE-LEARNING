@@ -10,7 +10,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-#[ORM\Entity(repositoryClass: UserRepository::class)]  // Assurez-vous que le repositoryClass pointe vers App\Repository\UserRepository
+#[ORM\Entity(repositoryClass: UserRepository::class)] 
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
@@ -37,7 +37,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     private ?string $LastName = null;
 
-    #[ORM\OneToMany(targetEntity: Achat::class, mappedBy: 'user')]
+    #[ORM\OneToMany(targetEntity: Achat::class, mappedBy: 'user',cascade: ['remove'])]
     private Collection $achats;
 
     #[ORM\OneToMany(targetEntity: Certification::class, mappedBy: 'user')]
