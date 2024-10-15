@@ -20,18 +20,18 @@ Extensions PHP requises : dom, json, libxml, mbstring, tokenizer, xml, xmlwriter
 git clone https://github.com/Aliiixxx/Devoir-KNOWLEDGE-LEARNING.git
 cd votre-projet
 2. Installer les dépendances du projet avec Composer :
+composer install
+composer update
 3. Configurer votre base de données dans le fichier .env :
 Mettez à jour la section DATABASE_URL dans votre fichier .env avec les informations de connexion à votre base de données :
 DATABASE_URL="mysql://db_user:db_password@127.0.0.1:3306/db_name?serverVersion=5.7"
 4. Créer la base de données et exécuter les migrations :
-symfony console doctrine:database:create
-symfony console doctrine:migrations:migrate
-5. Installer les assets front-end et construire les fichiers CSS et JavaScript :
-npm install
-npm run build
-6. Démarrer le serveur de développement Symfony :
-symfony serve
-7. Accéder à l'application :
+symfony console make:migration
+symfony console doctrine:migrations:migrate (ignorable si erreur)
+symfony console doctrine:fixtures:load
+5. Démarrer le serveur de développement Symfony :
+symfony serve -d
+6. Accéder à l'application :
 Ouvrez votre navigateur et rendez-vous sur http://localhost:8000.
 
 
